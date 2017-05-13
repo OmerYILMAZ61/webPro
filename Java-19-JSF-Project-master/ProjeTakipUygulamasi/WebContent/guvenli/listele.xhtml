@@ -51,6 +51,7 @@
 			<h:form rendered="#{projeBean.excelControl}" >
 				
 				<p:dataTable id="tbl" var="proje" value="#{projeBean.projeList}">
+					
 					<p:column headerText="Id">
 						<h:outputText value="#{proje.id}" />
 					</p:column>

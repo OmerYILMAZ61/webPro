@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 import com.vektorel.projetakip.dao.DAO;
@@ -11,7 +12,7 @@ import com.vektorel.projetakip.entity.UserEntity;
 import com.vektorel.projetakip.model.User;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class LoginBean implements Serializable{
 
 	/**
@@ -20,6 +21,7 @@ public class LoginBean implements Serializable{
 	private static final long serialVersionUID = -4165989573695827461L;
 	
 	
+	private boolean kullaniciIcerde = false;
 	private UserEntity userEntity;
 	
 	
@@ -34,10 +36,23 @@ public class LoginBean implements Serializable{
 		if(user == null)
 			return "fail.xhtml";
 		else
-			return "anasayfa.xhtml";
+		{
+			this.kullaniciIcerde = true;
+			return "guvenli/anasayfa.xhtml?faces-redirect=true";
+		}
+		}
+	
+	
+	public boolean isKullaniciIcerde() {
+		return kullaniciIcerde;
 	}
-	
-	
+
+
+	public void setKullaniciIcerde(boolean kullaniciIcerde) {
+		this.kullaniciIcerde = kullaniciIcerde;
+	}
+
+
 	public void setUserEntity(UserEntity userEntity) {
 		this.userEntity = userEntity;
 	}
